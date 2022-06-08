@@ -12,7 +12,6 @@ on:
 
 jobs:
   set_versions:
-  environment: approve_ref
     runs-on: ubuntu-latest
     concurrency: 
       group: ${{ inputs.host_name }}
