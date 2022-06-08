@@ -1,0 +1,38 @@
+name: Rollout to the instances
+
+on:
+  workflow_dispatch:
+
+jobs:
+  approve_ref:
+    environment: approve_ref
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Version ${{ github.event.inputs.config_tag_name }}"
+      - run: echo "Target(s) ${{ github.event.inputs.instance_group }}"
+      - run: echo "Workflow is triggerd by ${{ github.ref_type }} ${{ github.ref_name }}"
+  approve_infra:
+    environment: approve_infra
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Version ${{ github.event.inputs.config_tag_name }}"
+      - run: echo "Target(s) ${{ github.event.inputs.instance_group }}"
+      - run: echo "Workflow is triggerd by ${{ github.ref_type }} ${{ github.ref_name }}"
+      
+  # approve ref
+  send-notification:
+    needs:
+      - approve_ref
+    uses: ./.github/workflows/send.yaml
+    with:
+      host_name: my_host_name
+    secrets:
+      rc_webhook: ${{ secrets.RC_WEBHOOK }}
+
+  # approve infra
+  echo-stuff:
+    needs:
+      - approve_infra
+    steps:
+      - run: echo "Version ${{ github.event.inputs.config_tag_name }}"
+
