@@ -21,7 +21,8 @@ jobs:
       - name: Test with failure or succeed
         run: echoo "This does not exist"
       - name: Get the result of the if condition
-        run: echo "contains(inputs.host_name, 'infra')"
+        if: always() 
+        run: echo "contains(inputs.host_name, 'infra') == false"
       - name: Send Notification to Rocket Chat
         uses: RocketChat/Rocket.Chat.GitHub.Action.Notification@1.1.1
         if: always() || contains(inputs.host_name, 'infra')
