@@ -25,7 +25,7 @@ jobs:
         run: echo " ${{contains(inputs.host_name, 'infra') }}"
       - name: Send Notification to Rocket Chat
         uses: RocketChat/Rocket.Chat.GitHub.Action.Notification@1.1.1
-        if: always() && (contains(inputs.host_name, 'infra') == false)
+        if: always() && (contains(inputs.host_name, 'ref') || (contains(inputs.host_name, 'prod') )
         with:
           type: ${{ job.status }}
           job_name: 'Rollout of ${{ inputs.host_name }} triggered by ${{ github.actor }}:'
