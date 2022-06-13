@@ -22,7 +22,7 @@ jobs:
         run: echoo "This does not exist"
       - name: Get the result of the if condition
         if: always() 
-        run: echo " ${{ always() && contains(inputs.host_name, 'infra') }}""
+        run: echo " ${{contains(inputs.host_name, 'infra') }}""
       - name: Send Notification to Rocket Chat
         uses: RocketChat/Rocket.Chat.GitHub.Action.Notification@1.1.1
         if: contains(inputs.host_name, 'infra')
