@@ -22,10 +22,10 @@ jobs:
         run: echoo "This does not exist"
       - name: Get the result of the if condition
         if: always() 
-        run: echo "contains(inputs.host_name, 'infra') == false"
+        run: echo " ${{ always() && contains(inputs.host_name, 'infra') }}""
       - name: Send Notification to Rocket Chat
         uses: RocketChat/Rocket.Chat.GitHub.Action.Notification@1.1.1
-        if: always() || contains(inputs.host_name, 'infra')
+        if: ${{ always() && contains(inputs.host_name, 'infra') }}"
         with:
           type: ${{ job.status }}
           job_name: 'Rollout of ${{ inputs.host_name }} triggered by ${{ github.actor }}:'
