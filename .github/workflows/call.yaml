@@ -25,7 +25,7 @@ jobs:
     #   - approve_ref
     uses: ./.github/workflows/send.yaml
     with:
-      host_name: prod-wfe
+      host_name: qwd
     secrets:
       rc_webhook: ${{ secrets.RC_WEBHOOK }}
 
