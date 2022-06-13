@@ -25,7 +25,7 @@ jobs:
     #   - approve_ref
     uses: ./.github/workflows/send.yaml
     with:
-      host_name: some-prod-something
+      host_name: infra-dew
     secrets:
       rc_webhook: ${{ secrets.RC_WEBHOOK }}
 
