@@ -19,13 +19,15 @@ jobs:
     environment: ${{ inputs.host_name }}
     steps:
       - name: Test with failure or succeed
-        run: echo "This does not exist"
+        run: echoo "This does not exist"
+      - name: Get the result of the if condition
+        run: echo "contains(inputs.host_name, 'infra')"
       - name: Send Notification to Rocket Chat
         uses: RocketChat/Rocket.Chat.GitHub.Action.Notification@1.1.1
-        if: always()
+        if: always() || contains(inputs.host_name, 'infra')
         with:
           type: ${{ job.status }}
           job_name: 'Rollout of ${{ inputs.host_name }} triggered by ${{ github.actor }}:'
           url: ${{ secrets.rc_webhook }}
-          channel: '#releases2'
+          channel: '#aimee-test'
           username: Autodeployment Info

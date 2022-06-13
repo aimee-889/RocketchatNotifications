@@ -21,19 +21,19 @@ jobs:
       
   # approve ref
   send-notification:
-    needs:
-      - approve_ref
+    # needs:
+    #   - approve_ref
     uses: ./.github/workflows/send.yaml
     with:
-      host_name: my_host_name
+      host_name: infra-test
     secrets:
       rc_webhook: ${{ secrets.RC_WEBHOOK }}
 
   # approve infra
   echo-stuff:
     runs-on: ubuntu-latest
-    needs:
-      - approve_infra
+    # needs:
+    #   - approve_infra
     steps:
       - run: echo "Version ${{ github.event.inputs.config_tag_name }}"
 
